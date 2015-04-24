@@ -1,0 +1,1253 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Vide tes caches !</title>
+
+    <meta name="description" content="eZ Publish & les caches">
+    <meta name="author" content="Jérémy Poulain">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/clever.css" id="theme">
+    <link rel="stylesheet" href="css/more.css">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="images/clever/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/clever/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/clever/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/clever/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/clever/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/clever/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/clever/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/clever/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/clever/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="images/clever/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/clever/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="images/clever/favicon-16x16.png" sizes="16x16">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <a class="logo" href="."><img class="logo" src="images/clever/logo.svg" title="Logo"></a>
+
+    <div class="reveal">
+
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section>
+                <h1>Vide ton cache</h1>
+                <img src="images/logo.png" />
+                <p>
+                    <small>par <a href="https://github.com/tharkun">Jérémy Poulain</a> | <a href="http://www.clever-age.com/fr/" title="Clever Age">Clever Age</a></small>
+                </p>
+            </section>
+
+            <section>
+                <h2>Déroulé</h2>
+                <ul style="list-style-type: none;">
+                    <li><span class="test-block chapter1"></span> eZ Publish Legacy</li>
+                    <li><span class="test-block chapter2"></span> Symfony</li>
+                    <li><span class="test-block chapter3"></span> eZ publish Community</li>
+                    <li><span class="test-block chapter4"></span> Cas concrets</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Liens utiles</h2>
+                <ul>
+                    <li><a href="https://doc.ez.no/display/MAIN/eZ+Documentation+Center" target="_blank">eZ Publish</a></li>
+                    <li><a href="https://symfony.com/doc/current/index.html" target="_blank">Symfony</a></li>
+                    <li><a href="https://www.varnish-cache.org/docs" target="_blank">Varnish</a></li>
+                    <li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html" target="_blank">Protocole HTTP/1.1 & les entêtes </a></li>
+                </ul>
+            </section>
+
+            <section data-state="chapter1">
+                <section>
+                    <h2>eZ Publish Legacy</h2>
+                </section>
+                <section>
+                    <h2>Combien de niveau de caches ?</h2>
+                    <div class="fragment">
+                        <p>~ 20</p>
+                        <img src="images/so-cool2.gif" class="center" />
+                    </div>
+                </section>
+                <section>
+                    <h2>Cache bas niveau</h2>
+                    <ol>
+                        <li>Ini</li>
+                        <li>Active extensions</li>
+                        <li>Design base</li>
+                        <li>Override</li>
+                        <li>Template</li>
+                        <li>Translation</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>Cache contenu textuel</h2>
+                    <ul>
+                        <li>Viewcache</li>
+                        <li>Template block</li>
+                        <li>Content tree menu</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Cache de persistence</h2>
+                    <ul>
+                        <li>User info</li>
+                        <li>Content Language</li>
+                        <li>Class identifier</li>
+                        <li>Sort key cache</li>
+                        <li>Url alias cache</li>
+                        <li>State limitation</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Autres</h2>
+                    <ul>
+                        <li>Text to image</li>
+                        <li>Codepages</li>
+                        <li>Character transformation</li>
+
+                        <li>SI block (ESI ou SSI)</li>
+                        <li>Static pages</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Cache bas niveau</h2>
+                </section>
+                <section>
+                    <h2>INI</h2>
+                    <p>Compilation de configuration</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/cache/ini/*</td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Non</td>
+                        </tr>
+                    </table>
+                    <p>Quand les supprimer ?</p>
+                    <ul>
+                        <li class="green">Tout le temps</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>INI</h2>
+                    <p>Ordre de compilation</p>
+                    <ol>
+                        <li>Racine des settings</li>
+                        <li>Racine des ActiveAccessExtensions</li>
+                        <li>Siteaccess des ActiveAccessExtensions</li>
+                        <li>Siteaccess des ActiveExtensions + "legacy bundles"</li>
+                        <li>Siteaccess</li>
+                        <li>Racine des ActiveExtensions + "legacy bundles"</li>
+                        <li>Override</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>INI</h2>
+                    <p>Exemple de compilation</p>
+                    <ol>
+                        <li>ezpublish_legacy/settings/site.ini</li>
+                        <li>ezpublish_legacy/extension/feliway/settings/site.ini.append.php</li>
+                        <li>ezpublish_legacy/extension/feliway/settings/siteaccess/ww/site.ini.append.php</li>
+                        <li>ezpublish_legacy/extension/ezflow/settings/siteaccess/ww/site.ini.append.php</li>
+                        <li>src/.../Bundle/ezpublish_legacy/feliwayv3/settings/siteaccess/ww/site.ini.append.php</li>
+                        <li>ezpublish_legacy/settings/siteaccess/ww/site.ini.append.php</li>
+                        <li>ezpublish_legacy/extension/ezflow/settings/site.ini.append.php</li>
+                        <li>src/.../Bundle/ezpublish_legacy/feliwayv3/settings/site.ini.append.php</li>
+                        <li>ezpublish_legacy/settings/override/site.ini.append.php</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>Active extensions</h2>
+                    <p>Liste des extensions activées</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/cache/active_extensions_*</td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Non</td>
+                        </tr>
+                    </table>
+                    <p>Quand les supprimer ?</p>
+                    <ul>
+                        <li>Ajout / suppression d'une extension</li>
+                        <li>Modification de l'ordonnancement des extensions</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Active extensions</h2>
+                    <p>Exemple</p>
+                    <pre><code data-trim class="php">
+$activeExtensions = array( "ca_cevacommon",
+                       "ezodf",
+                       "ezscriptmonitor",
+                       "ez_network",
+                       "sqliimport",
+                       "ceva_pro",
+                       "ngsymfonytools",
+                       "product_legacy",
+                       "feliwayv3",
+                       "ca_cevasettings",
+                       "ezjscore",
+                       "ezfind",
+                       "ezoe",
+                       "ezflow",
+                       "ezwebin",
+                       "ezwt" );
+                    </code></pre>
+                    <p class="fragment">Ce fichier conditionne <span class="red">la compilation de ressources.</span></p>
+                </section>
+                <section>
+                    <h2>Design base</h2>
+                    <p>Liste les folders où se trouvent des ressources</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/site/cache/design_base_*</td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Oui</td>
+                        </tr>
+                    </table>
+                    <p>Quand les supprimer ?</p>
+                    <ul>
+                        <li>Cf slide n-1</li>
+                        <li>Ajout / suppression d'un répertoire de design</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Design base</h2>
+                    <p>Exemple</p>
+                    <pre><code data-trim class="txt">
+a:32:{i:0;s:46:"extension/feliway_mobile/design/feliway_mobile";
+i:4;s:42:"extension/ca_cevacommon/design/ceva_portal";
+i:5;s:30:"extension/ezfind/design/ezflow";
+i:6;s:30:"extension/ezflow/design/ezflow";
+i:7;s:31:"extension/ezfind/design/ezwebin";
+i:10;s:11:"design/base";
+i:11;s:39:"extension/ca_cevacommon/design/standard";
+i:24;s:32:"extension/ezfind/design/standard";
+i:25;s:30:"extension/ezoe/design/standard";
+i:28;s:32:"extension/ezflow/design/standard";
+i:31;s:15:"design/standard";}
+                    </code></pre>
+                    <p class="fragment">Ce fichier conditionne la <span class="red">récupération de ressources (js, css, img, tpl).</span></p>
+                </section>
+                <section>
+                    <h2>Override</h2>
+                    <p>Liste les templates utilisables</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/site/cache/override/</td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Non</td>
+                        </tr>
+                    </table>
+                    <p>Quand les supprimer ?</p>
+                    <ul>
+                        <li>Cf slide n-2</li>
+                        <li>Cf slide n-1</li>
+                        <li>Ajout / suppression d'un template</li>
+                        <li>Ajout / suppression d'une règle d'override</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Override</h2>
+                    <p>Exemple</p>
+                    <pre><code data-trim class="php">
+$GLOBALS['eZOverrideTemplateCacheMap'] = array (
+'md5-1' => 'extension/ezwt/design/standard/templates/parts/websitetoolbar/logo.tpl',
+...
+'md5-2' => 'extension/feliwayv3/design/feliwayv3/templates/modal/reminder.tpl',
+);
+                    </code></pre>
+                    <p class="fragment"><span class="red">ATTENTION :</span> ces fichiers peuvent faire plusieurs milliers de ligne.</p>
+                </section>
+                <section>
+                    <h2>Template</h2>
+                    <p>Compilation en php des tpls</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/site/cache/template/</td>
+                        </tr>
+                        <tr>
+                            <th>Format</th>
+                            <td>PHP <strong class="red">illisible</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Oui</td>
+                        </tr>
+                    </table>
+                    <p>Quand les supprimer ?</p>
+                    <ul>
+                        <li>Cf slides précédents</li>
+                        <li>Modification d'un tpl</li>
+                        <li>Modification d'une <span class="green">configuration ini</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Template</h2>
+                    <p>Exemple d'un tpl</p>
+                    <pre><code data-trim class="php">
+{if is_set($comment)|not}
+{def $comment = null()}
+{/if}
+
+{if $comment}
+{$message|i18n($context, $comment)}
+{else}
+{$message|i18n($context)}
+{/if}
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Template</h2>
+                    <p>Exemple d'un tpl compilé</p>
+                    <pre><code data-trim class="php">
+                        <?php
+// URI:       design:_legacy/i18n.html.tpl
+// Filename:  extension/ca_cevacommon/design/standard/templates/_legacy/i18n.html.tpl
+// Timestamp: 1421151763 (Tue Jan 13 13:22:43 CET 2015)
+$oldSetArray_5c2a1ed23ab230d95606c157a52b388a = isset( $setArray ) ? $setArray : array();
+$setArray = array();
+$tpl->Level++;
+if ( $tpl->Level > 40 )
+{
+$text = $tpl->MaxLevelWarning;$tpl->Level--;
+return;
+}
+$eZTemplateCompilerCodeDate = 1074699607;
+if ( !defined( 'EZ_TEMPLATE_COMPILER_COMMON_CODE' ) )
+include_once( 'var/factory/cache/template/compiled/common.php' );
+
+$text .= '
+<!-- START: including template: extension/ca_cevacommon/design/standard/templates/_legacy/i18n.html.tpl (design:_legacy/i18n.html.tpl) -->
+';
+// if begins
+unset( $if_cond );
+unset( $if_cond1 );
+unset( $if_cond2 );
+unset( $if_cond2 );
+$if_cond2 = ( array_key_exists( $rootNamespace, $vars ) and array_key_exists( 'comment', $vars[$rootNamespace] ) ) ? $vars[$rootNamespace]['comment'] : null;
+if (! isset( $if_cond2 ) ) $if_cond2 = NULL;
+while ( is_object( $if_cond2 ) and method_exists( $if_cond2, 'templateValue' ) )
+$if_cond2 = $if_cond2->templateValue();
+$if_cond1 = isset( $if_cond2 );unset( $if_cond2 );
+if (! isset( $if_cond1 ) ) $if_cond1 = NULL;
+while ( is_object( $if_cond1 ) and method_exists( $if_cond1, 'templateValue' ) )
+$if_cond1 = $if_cond1->templateValue();
+$if_cond = !( $if_cond1 );
+unset( $if_cond1 );
+if (! isset( $if_cond ) ) $if_cond = NULL;
+while ( is_object( $if_cond ) and method_exists( $if_cond, 'templateValue' ) )
+$if_cond = $if_cond->templateValue();
+
+if ( $if_cond )
+{
+$text .= '    ';
+// def $comment
+unset( $var );
+if (! isset( $var ) ) $var = NULL;
+while ( is_object( $var ) and method_exists( $var, 'templateValue' ) )
+$var = $var->templateValue();
+$varData = array( 'value' => $var );
+$tpl->processOperator( 'null',
+array (
+),
+$rootNamespace, $currentNamespace, $varData, false, false );
+$var = $varData['value'];
+unset( $varData );
+if (! isset( $var ) ) $var = NULL;
+while ( is_object( $var ) and method_exists( $var, 'templateValue' ) )
+$var = $var->templateValue();
+if ( $tpl->hasVariable( 'comment', $rootNamespace ) )
+{
+$tpl->warning( 'def', "Variable 'comment' is already defined.", array (
+0 =>
+array (
+0 => 2,
+1 => 4,
+2 => 31,
+),
+1 =>
+array (
+0 => 2,
+1 => 25,
+2 => 52,
+),
+2 => 'extension/ca_cevacommon/design/standard/templates/_legacy/i18n.html.tpl',
+) );
+$tpl->setVariable( 'comment', $var, $rootNamespace );
+}
+else
+{
+$tpl->setLocalVariable( 'comment', $var, $rootNamespace );
+}
+
+}
+unset( $if_cond );
+// if ends
+
+// if begins
+unset( $if_cond );
+unset( $if_cond );
+$if_cond = ( array_key_exists( $rootNamespace, $vars ) and array_key_exists( 'comment', $vars[$rootNamespace] ) ) ? $vars[$rootNamespace]['comment'] : null;
+if (! isset( $if_cond ) ) $if_cond = NULL;
+while ( is_object( $if_cond ) and method_exists( $if_cond, 'templateValue' ) )
+$if_cond = $if_cond->templateValue();
+
+if ( $if_cond )
+{
+$text .= '    ';
+unset( $var );
+unset( $var );
+$var = ( array_key_exists( $rootNamespace, $vars ) and array_key_exists( 'message', $vars[$rootNamespace] ) ) ? $vars[$rootNamespace]['message'] : null;
+if (! isset( $var ) ) $var = NULL;
+while ( is_object( $var ) and method_exists( $var, 'templateValue' ) )
+$var = $var->templateValue();
+$varData = array( 'value' => $var );
+$tpl->processOperator( 'i18n',
+array (
+0 =>
+array (
+0 =>
+array (
+0 => 4,
+1 =>
+array (
+0 => '',
+1 => 2,
+2 => 'context',
+),
+2 => false,
+),
+),
+1 =>
+array (
+0 =>
+array (
+0 => 4,
+1 =>
+array (
+0 => '',
+1 => 2,
+2 => 'comment',
+),
+2 => false,
+),
+),
+),
+$rootNamespace, $currentNamespace, $varData, false, false );
+$var = $varData['value'];
+unset( $varData );
+if (! isset( $var ) ) $var = NULL;
+while ( is_object( $var ) and method_exists( $var, 'templateValue' ) )
+$var = $var->templateValue();
+$text .= $var;
+unset( $var );
+
+}
+else
+{
+$text .= '    ';
+unset( $var );
+unset( $var );
+$var = ( array_key_exists( $rootNamespace, $vars ) and array_key_exists( 'message', $vars[$rootNamespace] ) ) ? $vars[$rootNamespace]['message'] : null;
+if (! isset( $var ) ) $var = NULL;
+while ( is_object( $var ) and method_exists( $var, 'templateValue' ) )
+$var = $var->templateValue();
+$varData = array( 'value' => $var );
+$tpl->processOperator( 'i18n',
+array (
+0 =>
+array (
+0 =>
+array (
+0 => 4,
+1 =>
+array (
+0 => '',
+1 => 2,
+2 => 'context',
+),
+2 => false,
+),
+),
+),
+$rootNamespace, $currentNamespace, $varData, false, false );
+$var = $varData['value'];
+unset( $varData );
+if (! isset( $var ) ) $var = NULL;
+while ( is_object( $var ) and method_exists( $var, 'templateValue' ) )
+$var = $var->templateValue();
+$text .= $var;
+unset( $var );
+
+}
+unset( $if_cond );
+// if ends
+
+$text .= '
+<!-- STOP: including template: extension/ca_cevacommon/design/standard/templates/_legacy/i18n.html.tpl (design:_legacy/i18n.html.tpl) -->
+';
+
+$setArray = $oldSetArray_5c2a1ed23ab230d95606c157a52b388a;
+$tpl->Level--;
+                    </code></pre>
+                    <p class="fragment red">Tpl de 7 lignes ==> 190 lignes de php</p>
+                    <p class="fragment green">Aucune fatale</p>
+                </section>
+                <section>
+                    <h2>Translation</h2>
+                    <p>Compilation en php des .ts</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/site/cache/translation/</td>
+                        </tr>
+                        <tr>
+                            <th>Format</th>
+                            <td>PHP <strong class="red">illisible</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Non</td>
+                        </tr>
+                    </table>
+                    <p>Quand les supprimer ?</p>
+                    <ul>
+                        <li>Modification d'un fichier de trad</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Cache contenu textuel</h2>
+                </section>
+                <section>
+                    <h2>Viewcache</h2>
+                    <p>Cache de vue</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/site/cache/content/siteacces/1/2/3/123-*.cache</td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Oui</td>
+                        </tr>
+                    </table>
+                    <p>Quand les supprimer ?</p>
+                    <ul>
+                        <li>Modification d'une règle impactant le contenu d'un objet</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Viewcache</h2>
+                    <p>Quand ne pas les supprimer ?</p>
+                    <ul>
+                        <li>Après publication</li>
+                    </ul>
+                    <p class="fragment red">
+                        Besoin de détruire les caches après publication<br />
+                        ===<br />
+                        Erreur/oubli de code
+                    </p>
+                </section>
+                <section>
+                    <h2>Viewcache</h2>
+                    <p>Règles définies dans le viewcache.ini</p>
+                    <pre><code data-trim class="php">
+[article]
+DependentClassIdentifier[]
+DependentClassIdentifier[]=frontpage
+DependentClassIdentifier[]=folder
+ClearCacheMethod[]
+ClearCacheMethod[]=parent
+ClearCacheMethod[]=object
+MaxParents=2
+                    </code></pre>
+                    <p class="fragment red">Souvent oublié lors du dev</p>
+                    <p class="fragment green">Utilisé également sur eZ 5 & Varnish</p>
+                </section>
+                <section>
+                    <h2>Template block</h2>
+                    <p>Cache texte de block de template selon <span class="red">des clés</span></p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/site/cache/template-block</td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Oui</td>
+                        </tr>
+                    </table>
+                    <p>Quand les supprimer ?</p>
+                    <ul>
+                        <li>En théorie : jamais</li>
+                    </ul>
+                    <p class="fragment"><span class="red">Impossibilité de cibler la destruction</span></p>
+                </section>
+                <section>
+                    <h2>Template block</h2>
+                    <p>Pourquoi ?</p>
+                    <ul>
+                        <li>Expire à la publication d'un objet</li>
+                        <li>Ou à la publication d'un noeud spécifié par le dev</li>
+                    </ul>
+                    <p class="fragment">Exception si ignore_content_expiry + ttl long</p>
+                    <p class="fragment">Sur eZ 5 : <span class="red">utilisation interdite</span></p>
+                </section>
+                <section>
+                    <h2>Content tree menu</h2>
+                    <p>Cache de l'arborescence des contenus dans le BO</p>
+                </section>
+
+                <section>
+                    <h2>Cache de persistence</h2>
+                    <p>Objectif : réduire les requêtes SQL</p>
+                </section>
+                <section>
+                    <h2>User info</h2>
+                    <p>Droits des utilisateurs</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/site/cache/user-info</td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Oui</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>Content Language</h2>
+                    <p>Cache des langues</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/site/cache/ezcontentlanguage_cache.php</td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Oui</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>Class identifier</h2>
+                    <p>Cache des classes eZ</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/site/cache/classidentifiers_*.php</td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Oui</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>Class attributs identifier</h2>
+                    <p>Cache des attributs de classes eZ</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/site/cache/classattributeidentifiers_*.php</td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Oui</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>Sort key</h2>
+                    <p>Cache des clés de tri</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/site/cache/sortkey_*.php</td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Oui</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>State limitation</h2>
+                    <p>Cache des états d'objet</p>
+                    <table>
+                        <tr>
+                            <th>Où</th>
+                            <td>var/site/cache/statelimitations_*.php</td>
+                        </tr>
+                        <tr>
+                            <th>Cluster</th>
+                            <td>Oui</td>
+                        </tr>
+                    </table>
+                </section>
+            </section>
+
+            <section data-state="chapter2">
+                <section>
+                    <h2>Symfony</h2>
+                </section>
+                <section>
+                    <h2>Quels caches ?</h2>
+                    <ol class="fragment">
+                        <li>Cache bas niveau</li>
+                        <li>Cache contenu textuel</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>Cache bas niveau</h2>
+                    <p>Propre à Symfony</p>
+                </section>
+                <section>
+                    <h2>Cache contenu textuel</h2>
+                </section>
+                <section>
+                    <h2>Varnish</h2>
+                    <p>Comment l'activer ?</p>
+                    <pre><code data-trim class="yml">
+framework:
+    esi:             ~
+    fragments:       ~
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Symfony & cache control</h2>
+                    <p>Comment cacher un élément ?</p>
+                    <pre><code data-trim class="php">
+use Symfony\Component\HttpFoundation\Response;
+$response = new Response();
+$response->setPublic();
+$response->setMaxAge(3600);
+$response->setSharedMaxAge(3600);
+$response->setPrivate();
+                    </code></pre>
+                    <p>Retourne un header "Cache-Control"</p>
+                    <pre><code data-trim class="txt">
+Cache-Control:public, s-maxage=3600
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Symfony & renders</h2>
+                    <p>Quel render utiliser ?</p>
+                    <ul>
+                        <li>render</li>
+                        <li>render_esi</li>
+                        <li>render_hinclude</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Renders & exécution</h2>
+                    <pre><code data-trim class="text">
+Line 10: contenu
+Line 11: {{ render( ... ) }}
+Line 12: contenu
+                    </code></pre>
+                    <p>On considère que Varnish n'a aucun cache.</p>
+                </section>
+                <section>
+                    <h2>Exécution d'un render</h2>
+                    <ul>
+                        <li>Demande de la page à Varnish</li>
+                        <li>Demande Varnish de la page à Sf</li>
+                        <li class="fragment">Code du tpl avant le render</li>
+                        <li class="fragment">Render <span class="red">en gardant le contexte</span></li>
+                        <li class="fragment">Code du tpl après le render</li>
+                        <li class="fragment">Rendu de la page à Varnish par Sf</li>
+                        <li class="fragment">Rendu de la page par Varnish</li>
+                    </ul>
+                </section>
+                <section>
+                    <img src="images/render.jpg" />
+                </section>
+                <section>
+                    <h2>Exécution d'un render_esi</h2>
+                    <ul>
+                        <li>Demande de la page à Varnish</li>
+                        <li>Demande Varnish de la page à Sf</li>
+                        <li class="fragment">Code du tpl avant le render_esi</li>
+                        <li class="fragment">Génération d'une balise ESI <span class="red">(pas d'exécution)</span></li>
+                        <li class="fragment">Code du tpl après le render_esi</li>
+                        <li class="fragment">Rendu de la page par Sf à Varnish</li>
+                        <li class="fragment">Demande Varnish de l'ESI à Sf</li>
+                        <li class="fragment">Rendu de l'ESI par Sf à Varnish</li>
+                        <li class="fragment">Rendu de la page par Varnish</li>
+                    </ul>
+                </section>
+                <section>
+                    <img src="images/render_esi.jpg" />
+                </section>
+                <section>
+                    <h2>Exécution d'un render_hinclude</h2>
+                    <ul>
+                        <li>Demande de la page à Varnish</li>
+                        <li>Demande Varnish de la page à Sf</li>
+                        <li class="fragment">Code du tpl avant le render_hinclude</li>
+                        <li class="fragment">Génération d'une balise hinclude <span class="red">(pas d'exécution)</span></li>
+                        <li class="fragment">Code du tpl après le render_hinclude</li>
+                        <li class="fragment">Rendu de la page par Sf à Varnish</li>
+                        <li class="fragment">Rendu de la page par Varnish</li>
+                        <li class="fragment">Demande utilisateur du hinclude à Varnish</li>
+                        <li class="fragment">Demande Varnish du hinclude à Sf</li>
+                        <li class="fragment">Rendu du hinclude par Sf à Varnish</li>
+                        <li class="fragment">Rendu du hinclude par Varnish</li>
+                    </ul>
+                </section>
+                <section>
+                    <img src="images/render_hinclude.jpg" />
+                </section>
+                <section>
+                    <h2>Renders & exécution</h2>
+                    <table class="big">
+                        <tr>
+                            <td></td>
+                            <td>Render</td>
+                            <td>ESI</td>
+                            <td>Hinclude</td>
+                        </tr>
+                        <tr>
+                            <td>Contexte</td>
+                            <td>oui</td>
+                            <td>non</td>
+                            <td>non</td>
+                        </tr>
+                        <tr>
+                            <td>Paramétres</td>
+                            <td>*</td>
+                            <td>serializable</td>
+                            <td>serializable</td>
+                        </tr>
+                        <tr>
+                            <td>Exécution</td>
+                            <td>synchrone</td>
+                            <td>asynchrone</td>
+                            <td>asynchrone</td>
+                        </tr>
+                        <tr>
+                            <td>Rendu</td>
+                            <td>synchrone</td>
+                            <td>synchrone</td>
+                            <td>asynchrone</td>
+                        </tr>
+                        <tr>
+                            <td>Cache</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Réseau interne</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Réseau externe</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>Render, quand ?</h2>
+                    <p>Rarement</p>
+                    <ul>
+                        <li>Impossibilité de pré-calculer dans les controllers</li>
+                    </ul>
+                    <p class="fragment">1% des cas</p>
+                </section>
+                <section>
+                    <h2>ESI, quand ?</h2>
+                    <p>Tout le temps</p>
+                    <ul>
+                        <li>Header</li>
+                        <li>Footer</li>
+                        <li>...</li>
+                    </ul>
+                    <p class="fragment">90% des cas</p>
+                </section>
+                <section>
+                    <h2>Hinclude, quand ?</h2>
+                    <p>Tout ce qui ralentit la génération d'une page</p>
+                    <ul>
+                        <li>Blocs SPOF</li>
+                        <li>Lié à l'utilisateur</li>
+                    </ul>
+                    <p class="fragment">10% des cas</p>
+                </section>
+            </section>
+
+            <section data-state="chapter3">
+                <section>
+                    <h2>eZ publish Community</h2>
+                </section>
+                <section>
+                    <h2>Quels caches ?</h2>
+                    <ol class="fragment">
+                        <li>Cache de persistence</li>
+                        <li>Cache contenu textuel</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>Cache de persistence</h2>
+                    <p><strong>Objectif :</strong> réduire les appels à l'API</p>
+                    <p class="fragment"><strong>Outils :</strong> "tedivm/stash-bundle"</p>
+                </section>
+                <section>
+                    <h2>Stash</h2>
+                    <p>Quels drivers ?</p>
+                    <ul>
+                        <li>Filesystem</li>
+                        <li><strong>Memcache</strong></li>
+                        <li class="red">APC</li>
+                        <li>Ephemeral</li>
+                        <li>BlackHole</li>
+                    </ul>
+                    <p class="fragment">Memcache est le seul driver supportant le mode cluster.</p>
+                </section>
+                <section>
+                    <h2>Stash & Filesystem</h2>
+                    <pre><code data-trim class="yml">
+stash:
+    caches:
+        default:
+            drivers:
+                - FileSystem
+            inMemory: true
+            registerDoctrineAdapter: false
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Stash & Memcache</h2>
+                    <pre><code data-trim class="yml">
+stash:
+    caches:
+        default:
+            drivers:
+                - Memcache
+            inMemory: true
+            registerDoctrineAdapter: false
+            Memcache:
+                prefix_key: prefix_
+                retry_timeout: 1
+                servers:
+                    -
+                        server: 10.0.0.254
+                        port: 11212
+                    </code></pre>
+                    <p class="fragment">Driver Memcache => Memcached ou Memcache.</p>
+                </section>
+                <section>
+                    <h2>Cache contenu textuel</h2>
+                </section>
+                <section>
+                    <h2>eZ & Varnish</h2>
+                    <pre><code data-trim class="yml">
+ezpublish:
+    http_cache:
+        purge_type: multiple_http # http à partir de 2014.11.0
+
+system:
+    all_group:
+        http_cache:
+            purge_servers: [http://127.0.0.1:6081]
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>eZ Publish & route & cache control</h2>
+                    <p>Les routes sont gérées dans l'ordre ci-dessous :</p>
+                    <ol class="fragment">
+                        <li>Route Sf : à faire en dev</li>
+                        <li>Contenu eZ : automatique mais surchargeable</li>
+                        <li>Module eZ 4 : à faire en dev</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>eZ Publish & cache control</h2>
+                    <p>eZ renvoie "public, max-age=XXX" <strong>si</strong></p>
+                    <pre><code data-trim class="yml">
+ezpublish:
+    system:
+        all_group:
+            content:
+                view_cache: true
+                ttl_cache: true
+                default_ttl: 3600
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>eZ Publish & cache control</h2>
+                    <p>Lier un cache à un contenu</p>
+                    <pre><code data-trim class="php">
+$response->headers->set('X-Location-Id', 2);
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>eZ Publish & cache control</h2>
+                    <p>Lier un cache à un utilisateur / groupe</p>
+                    <pre><code data-trim class="php">
+$response->setVary('X-User-Hash');
+                    </code></pre>
+                    <p class="fragment">Service à développer pour définir les clés d'unicité</p>
+                </section>
+            </section>
+
+            <section data-state="chapter4">
+                <section>
+                    <h2>Cas concrets</h2>
+                    <p>Questions à se poser</p>
+                    <ul>
+                        <li>Qu'est ce ?</li>
+                        <li>Quelle implémentation ?</li>
+                        <li>Comment purger ?</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Menu - 1</h2>
+                    <p>Affichage d'un menu à double niveau</p>
+                    <img src="images/header1.png" />
+                </section>
+                <section>
+                    <h2>Menu - 1</h2>
+                    <p>Quelle implémentation ?</p>
+                    <div class="fragment">
+                        <pre><code data-trim class="php">
+{{ render_esi( controller( 'MyBundle:Layout:toolbar' ) ) }}
+                        </code></pre>
+                        <pre><code data-trim class="php">
+$response = new Response();
+$response->setSharedMaxAge(86400);
+return $this->render('twig', $params, $response);
+                        </code></pre>
+                        <p>ESI public, ttl = 1 jour</p>
+                    </div>
+                    <p class="fragment"><br />Je ne vais pas attendre <span class="red">1 jour pour voir mes modifs !</span></p>
+                </section>
+                <section>
+                    <h2>Menu - 1</h2>
+                    <p>Comment purger ?</p>
+                    <div class="fragment">
+                        <p>Lier la purge à la purge de la home</p>
+                        <pre><code data-trim class="php">
+$response = new Response();
+$response->setSharedMaxAge(86400);
+$response->headers->set('X-Location-Id', $this->getRootLocation()->id);
+                        </code></pre>
+                    </div>
+                    <div class="fragment">
+                        <p>Déclencher la purge de la home à la publication des contenus</p>
+                        <pre><code data-trim class="php">
+[heading]
+DependentClassIdentifier[]=frontpage
+ClearCacheMethod[]=parent
+ClearCacheMethod[]=object
+MaxParents=1
+
+[article]
+DependentClassIdentifier[]=frontpage
+DependentClassIdentifier[]=heading
+ClearCacheMethod[]=parent
+ClearCacheMethod[]=object
+MaxParents=2
+                        </code></pre>
+                    </div>
+                </section>
+                <section>
+                    <h2>Menu - 2</h2>
+                    <p>Affichage d'un menu statique</p>
+                    <img src="images/header2.png" />
+                </section>
+                <section>
+                    <h2>Menu - 2</h2>
+                    <p>Quelle implémentation ?</p>
+                    <div class="fragment">
+                        <pre><code data-trim class="php">
+                            {% include ... %}
+                        </code></pre>
+                        <p>Pas de nécessité d'un render</p>
+                    </div>
+                </section>
+                <section>
+                    <h2>Actus sur la home</h2>
+                    <p>Affichage des dernières actus</p>
+                    <img src="images/actus.png" />
+                </section>
+                <section>
+                    <h2>Actus sur la home</h2>
+                    <p>Quelle implémentation ?</p>
+                    <div class="fragment">
+                        <pre><code data-trim class="php">
+{{ render_esi( controller( 'MyBundle:Actus:home' ) ) }}
+                        </code></pre>
+                        <pre><code data-trim class="php">
+$response = new Response();
+$response->setSharedMaxAge(3600);
+return $this->render('twig', $params, $response);
+                        </code></pre>
+                        <p>ESI public, ttl = 1 heure</p>
+                    </div>
+                </section>
+                <section>
+                    <h2>Actus sur la home</h2>
+                    <p>Comment purger ?</p>
+                    <div class="fragment">
+                        <p>Lier la purge à la purge du folder de news</p>
+                        <pre><code data-trim class="php">
+$response = new Response();
+$response->setSharedMaxAge(86400);
+$response->headers->set('X-Location-Id', $newsFolderLocation->id);
+                        </code></pre>
+                    </div>
+                    <div class="fragment">
+                        <p>Déclencher la purge du à la publication d'une news</p>
+                        <pre><code data-trim class="php">
+[news]
+DependentClassIdentifier[]=news_folder
+ClearCacheMethod[]=parent
+ClearCacheMethod[]=object
+MaxParents=1
+                        </code></pre>
+                    </div>
+                </section>
+                <section>
+                    <h2>Tweets</h2>
+                    <p>Affichage des derniers tweets</p>
+                    <img src="images/tweets.png" />
+                    <p class="fragment"></p>
+                </section>
+                <section>
+                    <h2>Tweets</h2>
+                    <p>Quelle implémentation ?</p>
+                    <pre><code data-trim class="php">
+{{ render_esi( controller( 'MyBundle:Twitter:last' ) ) }}
+                    </code></pre>
+                    <p class="fragment">Nécessité d'<span class="red">encadrer</span> les appels API via des timeouts</p>
+                </section>
+                <section>
+                    <h2>Tweets</h2>
+                    <p>Quelle implémentation ?</p>
+                    <pre><code data-trim class="php">
+{{ render_hinclude( controller( 'MyBundle:Twitter:last' ) ) }}
+                    </code></pre>
+                    <p class="fragment">Les temps d'appel à l'API <span class="green">ne s'ajouteront pas</span> aux temps de génération de la page.</p>
+                </section>
+                <section>
+                    <h2>Piège classique</h2>
+                    <p>Multiples réponses dans un controller</p>
+                    <pre><code data-trim class="php">
+if (...) {
+    $response->setPrivate();
+}
+...
+$response->setPublic()
+return $response;
+                    </code></pre>
+                    <p class="fragment green">Une action de controller = un type de réponse</p>
+                </section>
+            </section>
+
+            <section>
+                <h2>Questions ?</h2>
+            </section>
+
+        </div>
+
+    </div>
+
+    <footer class="slide-footer">
+        Réu tech - Clever Age - Jérémy Poulain
+    </footer>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: true,
+
+            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Parallax scrolling
+            // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+            // parallaxBackgroundSize: '2100px 900px',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+            ]
+        });
+
+        Reveal.addEventListener('ready', function() {
+            var bg = document.getElementsByClassName('state-background')[0];
+            bg.innerHTML =
+                    '<div id="test-type">\
+                        <div class="chapter1"></div>\
+                        <div class="chapter2"></div>\
+                        <div class="chapter3"></div>\
+                        <div class="chapter4"></div>\
+                        <div class="chapter5"></div>\
+                    </div>';
+        }, false );
+
+    </script>
+
+</body>
+</html>

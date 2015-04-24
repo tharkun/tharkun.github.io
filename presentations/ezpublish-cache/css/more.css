@@ -1,0 +1,125 @@
+
+.reveal .slide-number
+{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+footer.slide-footer
+{
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    margin-left: 20px;
+    z-index: 20;
+}
+
+#test-type
+{
+    position: absolute;
+    top:10px;
+    left: 10px;
+    text-align: center;
+}
+
+#test-type div
+{
+    display: none;
+    margin-right: 5px;
+    width:50px;
+    height:50px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.chapter1 #test-type .chapter1,
+.chapter2 #test-type .chapter2,
+.chapter3 #test-type .chapter3,
+.chapter4 #test-type .chapter4,
+.chapter5 #test-type .chapter5,
+.chapter5 #test-type .chapter6
+{
+    display:inline-block;
+}
+
+#test-type .chapter1, .test-block.chapter1
+{
+    background-color: green;
+}
+#test-type .chapter2, .test-block.chapter2
+{
+    background-color: red;
+}
+#test-type .chapter3, .test-block.chapter3
+{
+    background-color: purple;
+}
+#test-type .chapter4, .test-block.chapter4
+{
+    background-color: blue;
+}
+#test-type .chapter5, .test-block.chapter5
+{
+    background-color: orange;
+}
+#test-type .chapter6, .test-block.chapter6
+{
+    background-color: orange;
+}
+
+.reveal .test-block
+{
+    display: inline-block;
+    width: .9em;
+    margin: 0 10px 3px 0;
+    height: 0.9em;
+    vertical-align: middle;
+    border-radius: 5px;
+}
+
+.reveal h2.no-uppercase
+{
+    text-transform: none;
+}
+
+.reveal .red
+{
+    color: red;
+}
+.reveal .green
+{
+    color: green;
+}
+
+.reveal table
+{
+    margin: 0.5em auto 0.5em;
+    border: none;
+}
+
+.reveal table th, .reveal table td
+{
+    padding: 0.5em 0 0.5em 0;
+    border: none;
+}
+
+.reveal table.big th, .reveal table.big td
+{
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+}
+
+.reveal table th
+{
+    padding-right: 1em;
+}
+
+.reveal table td
+{
+    padding-left: 1em;
+}
+
+.reveal ul
+{
+    margin-bottom: 1em;
+}

@@ -1,0 +1,29 @@
+myIterator::rewind
+myIterator::valid
+myIterator::current
+myIterator::key
+/srv/perso/github/tharkun/tharkun.github.io/presentations/poo/day-4/iterator/index.php:65:
+int(0)
+/srv/perso/github/tharkun/tharkun.github.io/presentations/poo/day-4/iterator/index.php:65:
+string(14) "premierelement"
+
+myIterator::next
+myIterator::valid
+myIterator::current
+myIterator::key
+/srv/perso/github/tharkun/tharkun.github.io/presentations/poo/day-4/iterator/index.php:65:
+int(1)
+/srv/perso/github/tharkun/tharkun.github.io/presentations/poo/day-4/iterator/index.php:65:
+string(13) "secondelement"
+
+myIterator::next
+myIterator::valid
+myIterator::current
+myIterator::key
+/srv/perso/github/tharkun/tharkun.github.io/presentations/poo/day-4/iterator/index.php:65:
+int(2)
+/srv/perso/github/tharkun/tharkun.github.io/presentations/poo/day-4/iterator/index.php:65:
+string(14) "dernierelement"
+
+myIterator::next
+myIterator::valid
